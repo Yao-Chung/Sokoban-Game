@@ -31,3 +31,12 @@ Play the game by AI algorithms. Interact with Server by HTTP.
 ## Documents
 
 * Core data structures: https://lucid.app/lucidchart/4bee14c8-1421-4302-83f7-469048e54a12/view?page=0_0#
+
+# Working group
+
+* Members:
+    - Chang Yao Chung (Yao-Chung)
+    - Josh Ho (JoshHo919)
+    - Luis Hsu (LuisHsu)
+
+* Meeting: Mon. Wed. Fri. 12:30 - 13:00
