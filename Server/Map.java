@@ -1,6 +1,6 @@
 package Server;
 
-public class Map {
+public class GameMap {
     public Object object[][];
     public int width;
     public int height;
