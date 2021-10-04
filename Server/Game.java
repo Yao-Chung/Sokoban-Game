@@ -1,7 +1,7 @@
 package Server;
 
 class Game {
-    public Map map;
+    public GameMap map;
     public String filename;
 
     public void loadMap(String filename){
