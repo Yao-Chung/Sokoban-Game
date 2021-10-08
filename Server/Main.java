@@ -39,6 +39,7 @@ public class Main {
         try {
             game.loadMap(args[0]);
             print(game.map);
+            System.out.println(game.isWin());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -62,8 +62,12 @@ class Game {
     }
 
     public Boolean isWin(){
-        // TODO:
-        return false;
+        for(Target target: map.targets){
+            if(!(map.object[target.x][target.y] instanceof Box)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void restart() throws Exception{
