@@ -2,63 +2,57 @@ package game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.lang.Exception;
 
 class Game {
     public GameMap map;
     public String filename;
 
-    public void loadMap(String filename) throws Exception{
-        try {
-            // Set filename
-            this.filename = filename;
-            // Create Reader
-            Scanner scanner = new Scanner(new File(filename));
-            // Setup map
-            Scanner header = new Scanner(scanner.nextLine());
-            int width = header.nextInt();
-            int height = header.nextInt();
-            map = new GameMap(width, height);
-            // Store targets
-            ArrayList<Target> targetList = new ArrayList<Target>();
-            // Read lines
-            for(int y = 0; y < height; ++y) {
-                if(!scanner.hasNextLine()){
-                    throw new Exception("insufficient height when loading map file");
-                }
-                String line = scanner.nextLine();
-                for(int x = 0; x < width; ++x) {
-                    if(x >= line.length()){
-                        throw new Exception("insufficient width when loading map file");
-                    }
-                    switch(line.charAt(x)){
-                        case 'B':
-                            map.object[x][y] = new Box();
-                            map.object[x][y].x = x;
-                            map.object[x][y].y = y;
-                        break;
-                        case 'M':
-                            map.object[x][y] = new Man();
-                            map.object[x][y].x = x;
-                            map.object[x][y].y = y;
-                        break;
-                        case 'T':
-                            targetList.add(new Target());
-                            targetList.get(targetList.size() - 1).x = x;
-                            targetList.get(targetList.size() - 1).y = y;
-                        break;
-                        // TODO: Load wall
-                        default:
-                            map.object[x][y] = null;
-                    }
-                }
-            }
-            map.targets = targetList.toArray(new Target[targetList.size()]);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public void loadMap(String filename) throws FileNotFoundException, NoSuchElementException, InputMismatchException{
+        // Set filename
+        this.filename = filename;
+        // Create Reader
+        Scanner scanner = new Scanner(new File(filename));
+        // Setup map
+        int width = scanner.nextInt();
+        int height = scanner.nextInt();
+        map = new GameMap(width, height);
+        // Read Walls
+        int wallCount = scanner.nextInt();
+        for(int i = 0; i < wallCount; ++i){
+            int x = scanner.nextInt() - 1;
+            int y = scanner.nextInt() - 1;
+            map.object[x][y] = new GameObject();
+            map.object[x][y].x = x;
+            map.object[x][y].y = y;
         }
+        // Read Boxes
+        int boxCount = scanner.nextInt();
+        for(int i = 0; i < boxCount; ++i){
+            int x = scanner.nextInt() - 1;
+            int y = scanner.nextInt() - 1;
+            map.object[x][y] = new Box();
+            map.object[x][y].x = x;
+            map.object[x][y].y = y;
+        }
+        // Read Targets
+        int targetCount = scanner.nextInt();
+        map.targets = new Target[targetCount];
+        for(int i = 0; i < boxCount; ++i){
+            int x = scanner.nextInt() - 1;
+            int y = scanner.nextInt() - 1;
+            map.targets[i] = new Target();
+            map.targets[i].x = x;
+            map.targets[i].y = y;
+        }
+        // Read Man
+        int manX = scanner.nextInt() - 1;
+        int manY = scanner.nextInt() - 1;
+        map.object[manX][manY] = new Man();
+        map.object[manX][manY].x = manX;
+        map.object[manX][manY].y = manY;
     }
 
     public Boolean isWin(){

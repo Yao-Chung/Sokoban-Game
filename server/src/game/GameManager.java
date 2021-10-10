@@ -8,9 +8,11 @@ public class GameManager {
             for(int x = 0; x < map.width; ++x){
                 char output = ' ';
                 if (map.object[x][y] instanceof Man){
-                    output = 'M';
+                    output = '@';
                 }else if (map.object[x][y] instanceof Box){
-                    output = 'B';
+                    output = '$';
+                }else if (map.object[x][y] != null){
+                    output = '#';
                 }
                 graph[y][x] = output;
             }
@@ -18,9 +20,9 @@ public class GameManager {
         // Targets
         for(Target target: map.targets){
             if(target.touched){
-                graph[target.y][target.x] = '$';
+                graph[target.y][target.x] = '%';
             }else{
-                graph[target.y][target.x] = 'T';
+                graph[target.y][target.x] = '.';
             }
         }
         // Output
