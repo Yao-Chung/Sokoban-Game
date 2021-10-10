@@ -1,2 +1,3 @@
 rootProject.name = 'sokoban'
 include('src:game')
+include('src:http')

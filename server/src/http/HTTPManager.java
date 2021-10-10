@@ -1,5 +1,3 @@
-package Server;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -20,5 +18,9 @@ public class HTTPManager {
 
     public void setContext(String path, HttpHandler handler){
         server.createContext(path, handler);
+    }
+
+    public static void main(String[] args) {
+        
     }
 }

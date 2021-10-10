@@ -10,8 +10,8 @@ sourceSets {
     }
 }
 
-buildDir = "../../build/game"
+buildDir = "../../build/http"
 
 application {
-    mainClass = 'GameManager'
+    mainClass = 'HTTPManager'
 }
