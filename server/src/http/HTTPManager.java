@@ -3,7 +3,6 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
 import com.sun.net.httpserver.HttpServer;
-import com.sun.net.httpserver.HttpHandler;
 
 public class HTTPManager {
     private HttpServer server;
@@ -12,15 +11,18 @@ public class HTTPManager {
         server.setExecutor(Executors.newCachedThreadPool());
     }
 
-    public void start(){
-        server.start();
-    }
-
-    public void setContext(String path, HttpHandler handler){
-        server.createContext(path, handler);
-    }
-
     public static void main(String[] args) {
-        
+        int port = (args.length >= 1) ? Integer.parseInt(args[0]) : 3000;
+        try {
+            // Create server
+            HTTPManager httpManager = new HTTPManager(port);
+            // Create contexts
+            httpManager.server.createContext("/", new StaticFileHandler());
+            // Start
+            System.out.printf("Sokoban server running on port %d\n", port);
+            httpManager.server.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
