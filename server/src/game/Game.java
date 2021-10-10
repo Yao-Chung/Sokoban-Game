@@ -1,4 +1,4 @@
-package Server;
+package game;
 
 import java.io.File;
 import java.io.FileNotFoundException;

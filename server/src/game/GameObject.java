@@ -1,4 +1,4 @@
-package Server;
+package game;
 
 public class GameObject {
     public int x;

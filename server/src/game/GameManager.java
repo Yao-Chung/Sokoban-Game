@@ -1,6 +1,6 @@
-package Server;
+package game;
 
-public class Main {
+public class GameManager {
     private static void print(GameMap map){
         char[][] graph = new char[map.height][map.width];
         // Normal objects

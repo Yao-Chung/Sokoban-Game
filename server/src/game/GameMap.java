@@ -1,4 +1,4 @@
-package Server;
+package game;
 
 public class GameMap {
     public GameObject object[][];
