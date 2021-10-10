@@ -1,5 +1,3 @@
-package game;
-
 public class GameMap {
     public GameObject object[][];
     public Target targets[];
