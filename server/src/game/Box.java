@@ -1,5 +1,3 @@
-package game;
-
 public class Box extends GameObject{
     public void move(int dir){
         

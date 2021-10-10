@@ -13,5 +13,5 @@ sourceSets {
 buildDir = "../../build"
 
 application {
-    mainClass = 'game.GameManager'
+    mainClass = 'GameManager'
 }
