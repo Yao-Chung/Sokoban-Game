@@ -1,8 +1,9 @@
 package Server;
+import java.util.*;
 
-public class GameMap {
+java.util.*;public class GameMap {
     public GameObject object[][];
-    public Target targets[];
+    public HashSet<Target> targets;
     public int width;
     public int height;
     public GameMap(int width, int height){
