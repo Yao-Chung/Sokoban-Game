@@ -1,5 +1,3 @@
-package Server;
-
 public class GameMap {
     public GameObject object[][];
     public Target targets[];

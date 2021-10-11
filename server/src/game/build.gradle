@@ -1,0 +1,17 @@
+plugins {
+    id 'application'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["."]
+        }
+    }
+}
+
+buildDir = "../../build"
+
+application {
+    mainClass = 'GameManager'
+}
