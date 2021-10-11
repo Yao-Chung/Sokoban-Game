@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.InvalidPathException;
 import java.util.concurrent.Executors;
 
 import com.sun.net.httpserver.HttpServer;
@@ -17,7 +18,11 @@ public class HTTPManager {
             // Create server
             HTTPManager httpManager = new HTTPManager(port);
             // Create contexts
-            httpManager.server.createContext("/", new StaticFileHandler());
+            try{
+                httpManager.server.createContext("/", new StaticFileHandler("public"));
+            }catch(InvalidPathException e){
+                System.err.println("WARNING: 'public' directory is invalid, not serving static files");
+            }
             // Start
             System.out.printf("Sokoban server running on port %d\n", port);
             httpManager.server.start();
