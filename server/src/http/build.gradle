@@ -10,9 +10,13 @@ sourceSets {
     }
 }
 
+dependencies {
+    implementation project(':src:game')
+}
+
 tasks.run.workingDir = System.getProperty("user.dir")
-buildDir = "../../build/game"
+buildDir = "../../build/http"
 
 application {
-    mainClass = 'GameManager'
+    mainClass = 'HTTPManager'
 }

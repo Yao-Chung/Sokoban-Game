@@ -31,7 +31,7 @@ public class GameManager {
     public static void main(String[] args) {
         // Check args
         if(args.length != 1){
-            System.err.println("Usage: java -cp . Server.Main <map_file>");
+            System.err.println("Error: expected a map file");
             return;
         }
         // Game
