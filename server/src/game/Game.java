@@ -6,7 +6,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-class Game {
+public class Game {
     public GameMap map;
     public String filename;
 

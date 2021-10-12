@@ -1,26 +1,28 @@
+package server.src.game;
+//run method: ./gradlew :src:game:run --args=../levels/sokoban00.txt  
 public class GameManager {
     private static void print(GameMap map){
-        char[][] graph = new char[map.height][map.width];
+        char[][] graph = new char[map.rows][map.cols];
         // Normal objects
-        for(int y = 0; y < map.height; ++y){
-            for(int x = 0; x < map.width; ++x){
+        for(int r = 0; r < map.rows; ++r){
+            for(int c = 0; c < map.cols; ++c){
                 char output = ' ';
-                if (map.object[x][y] instanceof Man){
+                if (map.object[r][c] instanceof Man){
                     output = '@';
-                }else if (map.object[x][y] instanceof Box){
+                }else if (map.object[r][c] instanceof Box){
                     output = '$';
-                }else if (map.object[x][y] != null){
+                }else if (map.object[r][c] != null){
                     output = '#';
                 }
-                graph[y][x] = output;
+                graph[r][c] = output;
             }
         }
         // Targets
-        for(Target target: map.targets){
+        for(Target target: map.isTarget.values()){
             if(target.touched){
-                graph[target.y][target.x] = '%';
+                graph[target.row][target.col] = '%';
             }else{
-                graph[target.y][target.x] = '.';
+                graph[target.row][target.col] = '.';
             }
         }
         // Output
@@ -39,6 +41,9 @@ public class GameManager {
         try {
             game.loadMap(args[0]);
             print(game.map);
+            System.out.println(game.isWin());
+            Man man = (Man) game.map.object[6][6];
+            System.out.println(man.move(2));
             System.out.println(game.isWin());
         } catch (Exception e) {
             e.printStackTrace();
