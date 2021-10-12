@@ -1,7 +1,7 @@
-package Server;
+package server.src.game;
 
 public class Wall extends GameObject {
-    public Wall(int x, int y){
-        super(x, y);
+    public Wall(GameMap map, int row, int col){
+        super(map, row, col);
     }
 }
