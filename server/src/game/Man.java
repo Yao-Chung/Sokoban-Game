@@ -1,8 +1,8 @@
 package server.src.game;
 
 public class Man extends GameObject {
-    public Man(GameMap map, int x, int y) {
-        super(map, x, y);
+    public Man(GameMap map, int row, int col) {
+        super(map, row, col);
     }
     public Boolean move(int dir){
         // 0: left, 1: right, 2: up, 3: down
