@@ -10,7 +10,7 @@ public class GameManager {
                     output = '@';
                 }else if (map.object[r][c] instanceof Box){
                     output = '$';
-                }else if (map.object[x][y] instanceof Wall){
+                }else if (map.object[r][c] instanceof Wall){
                     output = '#';
                 }
                 graph[r][c] = output;
