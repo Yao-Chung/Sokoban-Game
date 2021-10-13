@@ -35,7 +35,7 @@ GET /move?direction=0
 
 #### Response
 
-```json
+```js
 {
     status: ("win"|"lose"|"continue"),
     map: <Map>
