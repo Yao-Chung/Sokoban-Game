@@ -4,6 +4,29 @@ CS271 final project
 
 # Usage
 
+## Build
+
+```shell
+cd server
+./gradlew build
+```
+
+## Run
+
+### Run HTTP server
+
+```shell
+cd server
+./gradlew :src:http:run
+```
+
+### Run local game
+
+```shell
+cd server
+./gradlew :src:game:run --args=../levels/<level_file>
+```
+
 # Design
 
 ## Goal
