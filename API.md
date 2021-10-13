@@ -4,7 +4,24 @@
 
 ### Map
 
-TODO
+A 2D array contains characters
+
+* `#` : Wall
+* `@` : Man
+* `$` : Box
+* `.` : Target (untouched)
+* `%` : Target (touched)
+* `null`: Empty
+
+```json
+[
+    ["#", "#", "#", "#"],
+    ["#", ".", "%", "#"],
+    ["#", "$", null, "#"],
+    ["#", "@", null, "#"],
+    ["#", "#", "#", "#"]
+]
+```
 
 ## Entries
 
@@ -21,7 +38,7 @@ GET /move?direction=0
 ```json
 {
     status: ("win"|"lose"|"continue"),
-    map: <map>
+    map: <Map>
 }
 ```
 
@@ -63,10 +80,11 @@ GET /levels
 
 #### Response
 
+Example:
+
 ```json
 [
     "level1",
-    "level2",
-    ...
+    "level2"
 ]
 ```

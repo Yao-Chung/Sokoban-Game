@@ -9,7 +9,7 @@ public class GameManager {
                     output = '@';
                 }else if (map.object[x][y] instanceof Box){
                     output = '$';
-                }else if (map.object[x][y] != null){
+                }else if (map.object[x][y] instanceof Wall){
                     output = '#';
                 }
                 graph[y][x] = output;
