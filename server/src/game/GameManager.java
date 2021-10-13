@@ -40,10 +40,11 @@ public class GameManager {
         try {
             game.loadMap(args[0]);
             print(game.map);
-            System.out.println(game.isWin());
-            Man man = (Man) game.map.object[6][6];
-            System.out.println(man.move(2));
-            System.out.println(game.isWin());
+            System.out.printf("isWin: %b\n", game.isWin());
+            Man man = (Man) game.map.object[1][1];
+            System.out.printf("move 3: %b\n", man.move(3));
+            print(game.map);
+            System.out.printf("isWin: %b\n", game.isWin());
         } catch (Exception e) {
             e.printStackTrace();
         }
