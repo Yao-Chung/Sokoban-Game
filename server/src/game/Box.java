@@ -1,5 +1,3 @@
-package server.src.game;
-
 public class Box extends GameObject {
     public Box(GameMap map, int row, int col) {
         super(map, row, col);

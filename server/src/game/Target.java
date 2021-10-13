@@ -1,5 +1,3 @@
-package server.src.game;
-
 public class Target extends GameObject{
     
     public Boolean touched;

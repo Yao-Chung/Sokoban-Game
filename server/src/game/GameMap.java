@@ -1,5 +1,3 @@
-package server.src.game;
-
 import java.util.HashMap;
 
 public class GameMap {

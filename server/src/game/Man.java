@@ -1,5 +1,3 @@
-package server.src.game;
-
 public class Man extends GameObject {
     public Man(GameMap map, int row, int col) {
         super(map, row, col);

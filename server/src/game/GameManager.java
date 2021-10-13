@@ -1,4 +1,3 @@
-package server.src.game;
 //run method: ./gradlew :src:game:run --args=../levels/sokoban00.txt  
 public class GameManager {
     private static void print(GameMap map){

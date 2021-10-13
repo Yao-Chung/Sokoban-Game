@@ -1,5 +1,3 @@
-package server.src.game;
-
 public class GameObject {
     public int row;
     public int col;
