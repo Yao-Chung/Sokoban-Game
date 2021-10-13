@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-class Game {
+public class Game {
     public GameMap map;
     public String filename;
 
@@ -14,51 +14,40 @@ class Game {
         // Create Reader
         Scanner scanner = new Scanner(new File(filename));
         // Setup map
-        int width = scanner.nextInt();
-        int height = scanner.nextInt();
-        map = new GameMap(width, height);
+        int rows = scanner.nextInt();
+        int cols = scanner.nextInt();
+        map = new GameMap(rows, cols);
         // Read Walls
         int wallCount = scanner.nextInt();
         for(int i = 0; i < wallCount; ++i){
-            int x = scanner.nextInt() - 1;
-            int y = scanner.nextInt() - 1;
-            map.object[x][y] = new GameObject();
-            map.object[x][y].x = x;
-            map.object[x][y].y = y;
+            int row = scanner.nextInt() - 1;
+            int col = scanner.nextInt() - 1;
+            map.object[row][col] = new Wall(map, row, col);
         }
         // Read Boxes
         int boxCount = scanner.nextInt();
         for(int i = 0; i < boxCount; ++i){
-            int x = scanner.nextInt() - 1;
-            int y = scanner.nextInt() - 1;
-            map.object[x][y] = new Box();
-            map.object[x][y].x = x;
-            map.object[x][y].y = y;
+            int r = scanner.nextInt() - 1;
+            int c = scanner.nextInt() - 1;
+            map.object[r][c] = new Box(map, r, c);
         }
         // Read Targets
         int targetCount = scanner.nextInt();
-        map.targets = new Target[targetCount];
-        for(int i = 0; i < boxCount; ++i){
-            int x = scanner.nextInt() - 1;
-            int y = scanner.nextInt() - 1;
-            map.targets[i] = new Target();
-            map.targets[i].x = x;
-            map.targets[i].y = y;
+        for(int i = 0; i < targetCount; ++i){
+            int r = scanner.nextInt() - 1;
+            int c = scanner.nextInt() - 1;
+            map.isTarget.put(r*cols+c, new Target(map, r, c));
         }
         // Read Man
-        int manX = scanner.nextInt() - 1;
-        int manY = scanner.nextInt() - 1;
-        map.object[manX][manY] = new Man();
-        map.object[manX][manY].x = manX;
-        map.object[manX][manY].y = manY;
+        int r = scanner.nextInt() - 1;
+        int c = scanner.nextInt() - 1;
+        map.object[r][c] = new Man(map, r, c);
     }
 
     public Boolean isWin(){
-        for(Target target: map.targets){
-            if(!(map.object[target.x][target.y] instanceof Box)){
+        for(Target target: map.isTarget.values())
+            if(target.touched == false)
                 return false;
-            }
-        }
         return true;
     }
 

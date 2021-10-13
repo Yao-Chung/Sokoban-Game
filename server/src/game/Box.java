@@ -1,34 +1,30 @@
 public class Box extends GameObject {
-    public GameMap map;
-    public Box(GameMap map, int x, int y) {
-        super(x, y);
-        this.map = map;
+    public Box(GameMap map, int row, int col) {
+        super(map, row, col);
     }
     // 0: left, 1: right, 2: up, 3: down
-    public boolean move(int dir) 
+    public Boolean move(int dir) 
     {
-        int[] dx = new int[]{-1, 1, 0, 0}, dy = new int[]{0, 0, -1, 1};
-        int next_x = this.x+dx[dir], next_y = this.y + dy[dir];
-        GameObject next = map.object[next_y][next_x];
+        int[] dr = new int[]{0, 0, -1, 1}, dc = new int[]{-1, 1, 0, 0};
+        int nextRow = this.row + dr[dir], nextCol = this.col + dc[dir];
+        int curIdx = this.row*map.cols+this.col, nextIdx = nextRow*map.cols+nextCol;
+        GameObject next = map.object[nextRow][nextCol];
         if(next instanceof Box || next instanceof Wall)
             return false;
-        else if(map.targets.contains(next)) {     //not sure about the object structure
-            Target curTarget = (Target)next;      
-            for(Target t: map.targets)
-                if(t.equals((Target)next))
-                    curTarget = t;
+        else if(map.isTarget.containsKey(nextIdx)) {
+            Target curTarget = map.isTarget.get(nextIdx);
             if(curTarget.touched)
                 return false;
             curTarget.touched = true;
-            map.object[next_y][next_x] = map.object[this.y][this.x];
-            map.object[this.y][this.x] = new GameObject(this.y, this.x);
-            return true;
+            map.object[nextRow][nextCol] = map.object[this.row][this.col];
+            map.object[this.row][this.col] = null;
         }
         else {
-            GameObject tmp = map.object[next_y][next_x];
-            map.object[next_y][next_x] = map.object[this.y][this.x];
-            map.object[this.y][this.x] = tmp;
-            return true;
+            map.object[nextRow][nextCol] = map.object[this.row][this.col];
+            map.object[this.row][this.col] = null;
         }
+        if(map.isTarget.containsKey(curIdx))       //if current position is target, we need to untouched it.
+            map.isTarget.get(curIdx).touched = false;
+        return true;
     }
 }
