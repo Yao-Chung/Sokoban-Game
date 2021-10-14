@@ -1,5 +1,7 @@
 //run method: ./gradlew :src:game:run --args=../levels/sokoban00.txt  
 public class GameManager {
+    public Game game = new Game();
+
     private static void print(GameMap map){
         char[][] graph = new char[map.rows][map.cols];
         // Normal objects
@@ -10,7 +12,7 @@ public class GameManager {
                     output = '@';
                 }else if (map.object[r][c] instanceof Box){
                     output = '$';
-                }else if (map.object[x][y] instanceof Wall){
+                }else if (map.object[r][c] instanceof Wall){
                     output = '#';
                 }
                 graph[r][c] = output;

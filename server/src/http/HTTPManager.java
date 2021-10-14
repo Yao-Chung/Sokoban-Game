@@ -7,6 +7,8 @@ import com.sun.net.httpserver.HttpServer;
 
 public class HTTPManager {
     private HttpServer server;
+    private GameManager games = new GameManager();
+
     HTTPManager(int port) throws IOException{
         server = HttpServer.create(new InetSocketAddress(port), 0);
         server.setExecutor(Executors.newCachedThreadPool());
@@ -18,8 +20,9 @@ public class HTTPManager {
             // Create server
             HTTPManager httpManager = new HTTPManager(port);
             // Create contexts
+            httpManager.server.createContext("/start", new StartHandler(httpManager.games, "../levels"));
             try{
-                httpManager.server.createContext("/", new StaticFileHandler("public"));
+                httpManager.server.createContext("/", new StaticFileHandler("../public"));
             }catch(InvalidPathException e){
                 System.err.println("WARNING: 'public' directory is invalid, not serving static files");
             }
