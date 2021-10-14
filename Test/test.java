@@ -1,5 +1,4 @@
-package Test;
-import server.src.game.*;
+import java.nio.file.Files;
 
 public class test {
     public static void main(String[] args) {
