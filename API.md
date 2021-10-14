@@ -84,7 +84,7 @@ Example:
 
 ```json
 [
-    "level1",
-    "level2"
+    "level1.txt",
+    "level2.txt"
 ]
 ```
