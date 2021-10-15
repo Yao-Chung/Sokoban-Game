@@ -5,6 +5,7 @@ public class GameMap {
     public HashMap<Integer, Target> isTarget;
     public int rows;
     public int cols;
+    public Man man;
     public GameMap(int rows, int cols){
         this.rows = rows;
         this.cols = cols;

@@ -41,7 +41,8 @@ public class Game {
         // Read Man
         int r = scanner.nextInt() - 1;
         int c = scanner.nextInt() - 1;
-        map.object[r][c] = new Man(map, r, c);
+        map.man = new Man(map, r, c);
+        map.object[r][c] = map.man;
     }
 
     public Boolean isWin(){
