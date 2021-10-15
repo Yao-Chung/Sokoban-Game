@@ -1,8 +1,8 @@
 public class Util {
     public static String toJsonString(GameMap map, boolean isWin){
         String result = "{";
-        result += "status: ";
-        result += (isWin == true) ? "\"Win\"," : "\"continue\",";
+        result += "win: ";
+        result += (isWin == true) ? "true," : "false,";
         result += "map: ";
         result += "[";
         for(int r = 0; r < map.rows; ++r){
