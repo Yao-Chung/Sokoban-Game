@@ -37,7 +37,7 @@ GET /move?direction=0
 
 ```js
 {
-    status: ("win"|"lose"|"continue"),
+    win: (true|false),
     map: <Map>
 }
 ```
