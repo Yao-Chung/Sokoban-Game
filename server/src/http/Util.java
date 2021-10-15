@@ -4,7 +4,12 @@ public class Util {
         result += "win: ";
         result += (isWin == true) ? "true," : "false,";
         result += "map: ";
-        result += "[";
+        result += serializeGameMap(map);
+        result += "}";
+        return result;
+    }
+    public static String serializeGameMap(GameMap map){
+        String result = "[";
         for(int r = 0; r < map.rows; ++r){
             result += "[";
             for(int c = 0; c < map.cols; ++c){
@@ -30,7 +35,6 @@ public class Util {
             result += "],";
         }
         result += "]";
-        result += "}";
         return result;
     }
 }

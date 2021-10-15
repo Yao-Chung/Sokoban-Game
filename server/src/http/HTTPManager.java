@@ -20,8 +20,9 @@ public class HTTPManager {
             HTTPManager httpManager = new HTTPManager(port);
             // Create contexts
             httpManager.server.createContext("/move", new MoveHandler(httpManager.games));
+            httpManager.server.createContext("/start", new StartHandler(httpManager.games, "../levels"));
             try{
-                httpManager.server.createContext("/", new StaticFileHandler("public"));
+                httpManager.server.createContext("/", new StaticFileHandler("../public"));
             }catch(InvalidPathException e){
                 System.err.println("WARNING: 'public' directory is invalid, not serving static files");
             }

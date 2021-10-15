@@ -8,6 +8,4 @@ build
 .settings
 .classpath
 
-# Ignore static file directory
-public/
 bin/
