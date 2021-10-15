@@ -1,5 +1,6 @@
 //run method: ./gradlew :src:game:run --args=../levels/sokoban00.txt  
 public class GameManager {
+    public Game game = new Game();
     private static void print(GameMap map){
         char[][] graph = new char[map.rows][map.cols];
         // Normal objects
@@ -35,9 +36,9 @@ public class GameManager {
             System.err.println("Error: expected a map file");
             return;
         }
-        // Game
-        Game game = new Game();
         try {
+            // Game
+            Game game = new Game();
             game.loadMap(args[0]);
             print(game.map);
             System.out.printf("isWin: %b\n", game.isWin());
