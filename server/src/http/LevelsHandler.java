@@ -1,8 +1,11 @@
 package http;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -11,12 +14,16 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import com.sun.source.tree.NewArrayTree;
 
-public class StaticFileHandler implements HttpHandler{
+
+public class LevelsHandler implements HttpHandler{
     private Path rootPath;
     private HashSet<String> fileSet;
 
@@ -30,7 +37,7 @@ public class StaticFileHandler implements HttpHandler{
         }
     }
 
-    StaticFileHandler(String rootPath) throws InvalidPathException, IOException{
+    LevelsHandler(String rootPath) throws InvalidPathException, IOException{
         // Get root path
         this.rootPath = Paths.get(rootPath).toAbsolutePath();
         if(!(Files.exists(this.rootPath) && Files.isDirectory(this.rootPath))){
@@ -43,28 +50,29 @@ public class StaticFileHandler implements HttpHandler{
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        // Get file path from URI
-        Path path = Paths.get(rootPath.toString(), exchange.getRequestURI().getPath());
-        if(path.toString().equals(rootPath.toString())){
-            // Redirect to index.html
-            Headers headers = exchange.getResponseHeaders();
-            headers.set("Location", "/index.html");
-            exchange.sendResponseHeaders(307, 0);
-        }else if(fileSet.contains(path.toString())){
-            // Found
-            exchange.sendResponseHeaders(200, Files.size(path));
-            FileInputStream iStream = new FileInputStream(path.toFile());
-            OutputStream oStream = exchange.getResponseBody();
-            iStream.transferTo(oStream);
-            oStream.close();
-            iStream.close();
-        }else{
-            // Not found
-            String message = "Not found";
-            exchange.sendResponseHeaders(404, message.length());
-            OutputStream oStream = exchange.getResponseBody();
-            oStream.write(message.getBytes());
-            oStream.close();
+
+        OutputStream oStream = exchange.getResponseBody();
+
+        //using regular expression to split the level name to file path
+        Pattern pattern = Pattern.compile("\\\\([a-zA-Z0-9]*)\\.txt$");
+
+        //Loading "level.txt" name
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append("[\n");
+        for (String s : fileSet) {
+            Matcher matcher = pattern.matcher(s);
+            if (matcher.find()) {
+                stringBuilder.append("\t" + matcher.group(1) + "," +"\n");
+            }
         }
+        stringBuilder.deleteCharAt(stringBuilder.length() - 2);
+        stringBuilder.append("]");
+        System.out.println(stringBuilder.toString());
+
+        //response
+        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, stringBuilder.toString().length());
+        oStream.write(stringBuilder.toString().getBytes(StandardCharsets.UTF_8));
+        oStream.close();
+
     }
 }
