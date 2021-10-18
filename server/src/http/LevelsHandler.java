@@ -51,18 +51,16 @@ public class LevelsHandler implements HttpHandler{
 
         OutputStream oStream = exchange.getResponseBody();
 
-        //using regular expression to split the level name to file path
-        // Pattern pattern = Pattern.compile("\\\\([a-zA-Z0-9]*\\.txt)$");
-
-        //Loading "level.txt" name
+        // Using regular expression to split the level name to file path
+        Pattern pattern = Pattern.compile("([^\\/]+\\.txt)$");
+        // Loading "level.txt" name
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("[\n");
         for (String s : fileSet) {
-            // Matcher matcher = pattern.matcher(s);
-            // if (matcher.find()) {
-                // stringBuilder.append("\t\"" + matcher.group(1) + "\"," +"\n");
-                stringBuilder.append("\t\"" + Path.of(s).getFileName() + "\"," +"\n");
-            // }
+            Matcher matcher = pattern.matcher(s);
+            if (matcher.find()) {
+                stringBuilder.append("\t\"" + matcher.group(1) + "\"," +"\n");
+            }
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 2);
         stringBuilder.append("]");
