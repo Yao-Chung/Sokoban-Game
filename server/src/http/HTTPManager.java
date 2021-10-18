@@ -21,6 +21,7 @@ public class HTTPManager {
             // Create contexts
             httpManager.server.createContext("/move", new MoveHandler(httpManager.games));
             httpManager.server.createContext("/start", new StartHandler(httpManager.games, "../levels"));
+            httpManager.server.createContext("/restart", new RestartHandler(httpManager.games));
             try{
                 httpManager.server.createContext("/", new StaticFileHandler("../public"));
             }catch(InvalidPathException e){
