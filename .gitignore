@@ -1,5 +1,3 @@
 .vscode/
 .DS_Store
 *.class
-# Ignore static file directory
-public/
