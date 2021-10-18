@@ -1,5 +1,3 @@
-package http;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.file.InvalidPathException;
@@ -27,7 +25,7 @@ public class HTTPManager {
             }
             //levels
             try{
-                httpManager.server.createContext("/levels", new LevelsHandler("levels"));
+                httpManager.server.createContext("/levels", new LevelsHandler("../levels"));
             }catch(InvalidPathException e){
                 System.err.println("WARNING: 'public' directory is invalid, not serving static files");
             }
