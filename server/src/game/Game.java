@@ -22,31 +22,31 @@ public class Game {
         for(int i = 0; i < wallCount; ++i){
             int row = scanner.nextInt() - 1;
             int col = scanner.nextInt() - 1;
-            map.object[row][col] = new Wall(map, row, col);
+            map.objects[row][col] = new Wall(map, row, col);
         }
         // Read Boxes
         int boxCount = scanner.nextInt();
         for(int i = 0; i < boxCount; ++i){
             int r = scanner.nextInt() - 1;
             int c = scanner.nextInt() - 1;
-            map.object[r][c] = new Box(map, r, c);
+            map.objects[r][c] = new Box(map, r, c);
         }
         // Read Targets
         int targetCount = scanner.nextInt();
         for(int i = 0; i < targetCount; ++i){
             int r = scanner.nextInt() - 1;
             int c = scanner.nextInt() - 1;
-            map.isTarget.put(r*cols+c, new Target(map, r, c));
+            map.targets.put(r*cols+c, new Target(map, r, c));
         }
         // Read Man
         int r = scanner.nextInt() - 1;
         int c = scanner.nextInt() - 1;
         map.man = new Man(map, r, c);
-        map.object[r][c] = map.man;
+        map.objects[r][c] = map.man;
     }
 
     public Boolean isWin(){
-        for(Target target: map.isTarget.values())
+        for(Target target: map.targets.values())
             if(target.touched == false)
                 return false;
         return true;

@@ -8,23 +8,23 @@ public class Box extends GameObject {
         int[] dr = new int[]{0, 0, -1, 1}, dc = new int[]{-1, 1, 0, 0};
         int nextRow = this.row + dr[dir], nextCol = this.col + dc[dir];
         int curIdx = this.row*map.cols+this.col, nextIdx = nextRow*map.cols+nextCol;
-        GameObject next = map.object[nextRow][nextCol];
+        GameObject next = map.objects[nextRow][nextCol];
         if(next instanceof Box || next instanceof Wall)
             return false;
-        else if(map.isTarget.containsKey(nextIdx)) {
-            Target curTarget = map.isTarget.get(nextIdx);
+        else if(map.targets.containsKey(nextIdx)) {
+            Target curTarget = map.targets.get(nextIdx);
             if(curTarget.touched)
                 return false;
             curTarget.touched = true;
-            map.object[nextRow][nextCol] = map.object[this.row][this.col];
-            map.object[this.row][this.col] = null;
+            map.objects[nextRow][nextCol] = map.objects[this.row][this.col];
+            map.objects[this.row][this.col] = null;
         }
         else {
-            map.object[nextRow][nextCol] = map.object[this.row][this.col];
-            map.object[this.row][this.col] = null;
+            map.objects[nextRow][nextCol] = map.objects[this.row][this.col];
+            map.objects[this.row][this.col] = null;
         }
-        if(map.isTarget.containsKey(curIdx))       //if current position is target, we need to untouched it.
-            map.isTarget.get(curIdx).touched = false;
+        if(map.targets.containsKey(curIdx))       //if current position is target, we need to untouched it.
+            map.targets.get(curIdx).touched = false;
         return true;
     }
 }

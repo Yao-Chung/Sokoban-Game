@@ -7,18 +7,18 @@ public class GameManager {
         for(int r = 0; r < map.rows; ++r){
             for(int c = 0; c < map.cols; ++c){
                 char output = ' ';
-                if (map.object[r][c] instanceof Man){
+                if (map.objects[r][c] instanceof Man){
                     output = '@';
-                }else if (map.object[r][c] instanceof Box){
+                }else if (map.objects[r][c] instanceof Box){
                     output = '$';
-                }else if (map.object[r][c] instanceof Wall){
+                }else if (map.objects[r][c] instanceof Wall){
                     output = '#';
                 }
                 graph[r][c] = output;
             }
         }
         // Targets
-        for(Target target: map.isTarget.values()){
+        for(Target target: map.targets.values()){
             if(target.touched){
                 graph[target.row][target.col] = '%';
             }else{
@@ -42,7 +42,7 @@ public class GameManager {
             game.loadMap(args[0]);
             print(game.map);
             System.out.printf("isWin: %b\n", game.isWin());
-            Man man = (Man) game.map.object[1][1];
+            Man man = (Man) game.map.objects[1][1];
             System.out.printf("move 3: %b\n", man.move(3));
             print(game.map);
             System.out.printf("isWin: %b\n", game.isWin());
