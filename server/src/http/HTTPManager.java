@@ -26,6 +26,12 @@ public class HTTPManager {
             }catch(InvalidPathException e){
                 System.err.println("WARNING: 'public' directory is invalid, not serving static files");
             }
+            //levels
+            try{
+                httpManager.server.createContext("/levels", new LevelsHandler("../levels"));
+            }catch(InvalidPathException e){
+                System.err.println("WARNING: 'public' directory is invalid, not serving static files");
+            }
             // Start
             System.out.printf("Sokoban server running on port %d\n", port);
             httpManager.server.start();
