@@ -12,7 +12,7 @@ public class RestartHandler implements HttpHandler{
     @Override
     public void handle(HttpExchange exchange) throws IOException{
         int status = 200;
-        games.game.loadMap(games.game.filename);
+        games.game.restart();
         String message = Util.serializeGameMap(games.game.map);
         exchange.sendResponseHeaders(status, message.length());
         OutputStream oStream = exchange.getResponseBody();
