@@ -1,3 +1,8 @@
+import java.net.HttpCookie;
+import java.util.List;
+
+import com.sun.net.httpserver.HttpExchange;
+
 public class Util {
     public static String toJsonString(GameMap map, boolean isWin){
         String result = "{";
@@ -36,5 +41,13 @@ public class Util {
         }
         result += "]";
         return result;
+    }
+    public static String getToken(HttpExchange exchange) throws NoSuchFieldException, IllegalAccessException, IndexOutOfBoundsException{
+        List<String> cookieHeaders = exchange.getRequestHeaders().get("Cookie");
+        if(cookieHeaders == null){
+            throw new NoSuchFieldException();
+        }
+        HttpCookie cookie = HttpCookie.parse(cookieHeaders.get(0)).stream().filter(c -> c.getName().equals("token")).toList().get(0);
+        return cookie.getValue();
     }
 }
