@@ -1,7 +1,6 @@
 import java.lang.IllegalArgumentException;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.HttpCookie;
 import java.security.InvalidKeyException;
 
 import com.sun.net.httpserver.HttpExchange;
