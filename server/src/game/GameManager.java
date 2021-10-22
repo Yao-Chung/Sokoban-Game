@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 //run method: ./gradlew :src:game:run --args=../levels/sokoban00.txt  
 public class GameManager {
     public Game game = new Game();
@@ -30,24 +32,34 @@ public class GameManager {
             System.out.println(row);
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         // Check args
         if(args.length != 1){
             System.err.println("Error: expected a map file");
             return;
         }
-        try {
-            // Game
-            Game game = new Game();
-            game.loadMap(args[0]);
-            print(game.map);
-            System.out.printf("isWin: %b\n", game.isWin());
-            Man man = (Man) game.map.objects[1][1];
-            System.out.printf("move 3: %b\n", man.move(3));
-            print(game.map);
-            System.out.printf("isWin: %b\n", game.isWin());
-        } catch (Exception e) {
-            e.printStackTrace();
+        Game game = new Game();
+        game.loadMap(args[0]);
+        Man man = game.map.man;
+        print(game.map);
+        System.out.printf("isWin: %b\n", game.isWin());
+        Scanner scanner = new Scanner(System.in);
+        // String input = scanner.nextLine();
+        // System.out.println(input);
+        while(true){
+            try {
+                System.out.println("Please enter the direction:");
+                String input = scanner.nextLine();
+                int dir = Integer.parseInt(input);
+                if(dir > 3 || dir < 0)
+                    break;
+                System.out.printf("move 3: %b\n", man.move(dir));
+                System.out.printf("isWin: %b\n", game.isWin());
+                print(game.map);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+        scanner.close();
     }
 }
