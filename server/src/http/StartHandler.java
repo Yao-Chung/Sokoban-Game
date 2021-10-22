@@ -44,7 +44,7 @@ public class StartHandler implements HttpHandler{
                 game.loadMap(levelSet.get(level).toString());
                 // Set token as cookie
                 HttpCookie cookie = new HttpCookie("token", token);
-                exchange.getResponseHeaders().add("Set-Cookie", cookie.toString());
+                exchange.getResponseHeaders().add("Set-cookie", cookie.toString());
                 // Send map
                 message = Util.serializeGameMap(game.map);
             }else{
