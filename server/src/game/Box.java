@@ -16,12 +16,16 @@ public class Box extends GameObject {
             if(curTarget.touched)
                 return false;
             curTarget.touched = true;
-            map.objects[nextRow][nextCol] = map.objects[this.row][this.col];
             map.objects[this.row][this.col] = null;
+            this.row = nextRow;
+            this.col = nextCol;
+            map.objects[nextRow][nextCol] = this;
         }
         else {
-            map.objects[nextRow][nextCol] = map.objects[this.row][this.col];
             map.objects[this.row][this.col] = null;
+            this.row = nextRow;
+            this.col = nextCol;
+            map.objects[nextRow][nextCol] = this;
         }
         if(map.targets.containsKey(curIdx))       //if current position is target, we need to untouched it.
             map.targets.get(curIdx).touched = false;

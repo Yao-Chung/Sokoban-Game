@@ -11,14 +11,18 @@ public class Man extends GameObject {
             Box box = (Box)next;
             if(!box.move(dir))
                 return false;
-            map.objects[nextRow][nextCol] = map.objects[this.row][this.col];
             map.objects[this.row][this.col] = null;
+            this.row = nextRow;
+            this.col = nextCol;
+            map.objects[nextRow][nextCol] = this;
         }
         else if(next instanceof Wall)
             return false;
         else{
-            map.objects[nextRow][nextCol] = map.objects[this.row][this.col];
             map.objects[this.row][this.col] = null;
+            this.row = nextRow;
+            this.col = nextCol;
+            map.objects[nextRow][nextCol] = this;
         }
         return true;
     }

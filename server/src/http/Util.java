@@ -1,9 +1,9 @@
 public class Util {
     public static String toJsonString(GameMap map, boolean isWin){
         String result = "{";
-        result += "win: ";
+        result += "\"win\": ";
         result += (isWin == true) ? "true," : "false,";
-        result += "map: ";
+        result += "\"map\": ";
         result += serializeGameMap(map);
         result += "}";
         return result;
