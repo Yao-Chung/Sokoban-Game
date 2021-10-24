@@ -1,9 +1,9 @@
 public class Util {
     public static String toJsonString(GameMap map, boolean isWin){
         String result = "{";
-        result += "win: ";
+        result += "\"win\": ";
         result += (isWin == true) ? "true," : "false,";
-        result += "map: ";
+        result += "\"map\": ";
         result += serializeGameMap(map);
         result += "}";
         return result;
@@ -14,25 +14,27 @@ public class Util {
             result += "[";
             for(int c = 0; c < map.cols; ++c){
                 if (map.objects[r][c] instanceof Man){
-                    result += "\"@\",";
+                    result += "\"@\"";
                 }else if (map.objects[r][c] instanceof Box){
-                    result += "\"$\",";
+                    result += "\"$\"";
                 }else if (map.objects[r][c] instanceof Wall){
-                    result += "\"#\",";
+                    result += "\"#\"";
                 }else{
                     int targetKey = r*map.cols+c;
                     if(map.targets.containsKey(targetKey)){
                         if(map.targets.get(targetKey).touched){
-                            result += "\"%\",";
+                            result += "\"%\"";
                         }else{
-                            result += "\".\",";
+                            result += "\".\"";
                         }
                     }else{
-                        result += "null,";
+                        result += "null";
                     }
                 }
+                result += ((c == (map.cols - 1)) ? "" : ",");
             }
-            result += "],";
+            result += "]";
+            result += ((r == (map.rows - 1)) ? "" : ",");
         }
         result += "]";
         return result;
