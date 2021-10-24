@@ -1,4 +1,6 @@
 import java.io.OutputStream;
+import java.net.HttpCookie;
+import java.security.InvalidKeyException;
 import java.io.IOException;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -11,10 +13,24 @@ public class RestartHandler implements HttpHandler{
     }
     @Override
     public void handle(HttpExchange exchange) throws IOException{
+        String message = "";
         int status = 200;
         try {
-            games.game.restart();
-            String message = Util.serializeGameMap(games.game.map);
+            // Get token
+            try {
+                String token = Util.getToken(exchange);
+                Game game = games.getGame(token);
+                if(game == null){
+                    throw new InvalidKeyException();
+                }
+                // Restart
+                game.restart();
+                // Send message
+                message = Util.serializeGameMap(game.map);
+            } catch (Exception e) {
+                message = "Unauthorized";
+                status = 401;
+            }
             exchange.sendResponseHeaders(status, message.length());
             OutputStream oStream = exchange.getResponseBody();
             oStream.write(message.getBytes());

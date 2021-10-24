@@ -60,7 +60,6 @@ public class LevelsHandler implements HttpHandler{
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 2);
         stringBuilder.append("]");
-        System.out.println(stringBuilder.toString());
 
         //response
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, stringBuilder.toString().length());

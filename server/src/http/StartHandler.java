@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.HttpCookie;
 import java.util.HashMap;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,8 +38,15 @@ public class StartHandler implements HttpHandler{
         if(query.startsWith("level=")){
             String level = query.substring(6);
             if(levelSet.containsKey(level)){
-                games.game.loadMap(levelSet.get(level).toString());
-                message = Util.serializeGameMap(games.game.map);
+                // Create game
+                String token = games.createGame();
+                Game game = games.getGame(token);
+                game.loadMap(levelSet.get(level).toString());
+                // Set token as cookie
+                HttpCookie cookie = new HttpCookie("token", token);
+                exchange.getResponseHeaders().add("Set-cookie", cookie.toString());
+                // Send map
+                message = Util.serializeGameMap(game.map);
             }else{
                 message = "Not found";
                 status = 404;
