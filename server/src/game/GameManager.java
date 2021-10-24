@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GameManager {
     public Game game = new Game();
     private static void print(GameMap map){
