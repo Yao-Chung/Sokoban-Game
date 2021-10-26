@@ -20,7 +20,6 @@ public class GameManager {
                         games.remove(entry.getValue());
                         timestamps.remove(entry.getKey());
                     }
-                    System.out.println(games);
                 }
             }
         }, 0, 1000);

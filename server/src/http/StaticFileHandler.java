@@ -50,6 +50,7 @@ public class StaticFileHandler implements HttpHandler{
             exchange.sendResponseHeaders(307, 0);
         }else if(fileSet.contains(path.toString())){
             // Found
+            exchange.getResponseHeaders().set("Content-type", Files.probeContentType(path));
             exchange.sendResponseHeaders(200, Files.size(path));
             FileInputStream iStream = new FileInputStream(path.toFile());
             OutputStream oStream = exchange.getResponseBody();
