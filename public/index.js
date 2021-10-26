@@ -62,6 +62,9 @@ function loadMap(mapObj){
                 break;
                 case ".":
                     elem.src = "target.svg";
+                    break;
+                case null:
+                    map[y][x].src = "null.svg";
                 break;
             }
             map[y].push(elem);
@@ -70,6 +73,7 @@ function loadMap(mapObj){
 }
 
 function renderMap(mapObj){
+    console.log(mapObj)
     mapObj.forEach((row, y) => {
         row.forEach((cell, x) => {
             switch(cell){
@@ -88,20 +92,56 @@ function renderMap(mapObj){
                 case ".":
                     map[y][x].src = "target.svg";
                 break;
+                case null:
+                    map[y][x].src = "null.svg";
+                break;
             }
         })
     })
 }
 
 function startGame(level){
+    // Set current option
     if(currentLevelOption !== null){
         currentLevelOption.className = "list-group-item list-group-item-action";
     }
     currentLevelOption = this;
     this.className = "list-group-item list-group-item-action list-group-item-secondary active";
+    // Start game
     fetch(`/start?level=${level}`, {
         method: 'GET',
     })
     .then(res => res.json())
     .then(mapObj => loadMap(mapObj))
+}
+
+function userMove(event){
+    if(currentLevelOption !== null){
+        // Get direction
+        direction = null;
+        switch(event.key){
+            case 'w':
+                direction = 2;
+                break;
+            case 'a':
+                direction = 0;
+                break;
+            case 's':
+                direction = 3;
+                break;
+            case 'd':
+                direction = 1;
+                break;
+            default:
+                return;
+        }
+        // Move
+        fetch(`/move?direction=${direction}`, {
+            method: 'GET',
+        })
+        .then(res => res.json())
+        .then(mapObj => {
+            renderMap(mapObj["map"])
+        })
+    }
 }

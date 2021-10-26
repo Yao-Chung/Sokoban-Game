@@ -8,9 +8,10 @@
     <title>Sokoban Game</title>
     <link rel="stylesheet" href="/index.css" />
 </head>
-<body onload="fetchLevels()">
+<body onkeypress="userMove(event)" onload="fetchLevels()">
     <nav id="nav-bar" class="navbar navbar-light bg-light">
         <h1>Sokoban</h1>
+        <b class="text-secondary">W: Up, A: Left, S: Down,D: Right,</b>
     </nav>
     <div id="wrapper" class="row">
         <div id="menu">

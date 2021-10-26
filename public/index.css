@@ -16,6 +16,10 @@ html, body{
     color: #212529;
 }
 
+#nav-bar b{
+    font-weight: normal;
+}
+
 #menu{
     height: 100%;
     width: 20%;
