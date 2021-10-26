@@ -71,7 +71,7 @@ function loadMap(mapObj){
                     elem.src = "target.svg";
                     break;
                 case null:
-                    map[y][x].src = "null.svg";
+                    elem.src = "null.svg";
                 break;
             }
             map[y].push(elem);
@@ -80,7 +80,6 @@ function loadMap(mapObj){
 }
 
 function renderMap(mapObj){
-    console.log(mapObj)
     mapObj.forEach((row, y) => {
         row.forEach((cell, x) => {
             switch(cell){
@@ -123,6 +122,16 @@ function startGame(level){
     .then(() => {
         usageModal.show();
     })
+}
+
+function resetGame(){
+    if(currentLevelOption !== null){
+        fetch(`/restart`, {
+            method: 'GET',
+        })
+        .then(res => res.json())
+        .then(mapObj => renderMap(mapObj))
+    }
 }
 
 function userMove(event){
