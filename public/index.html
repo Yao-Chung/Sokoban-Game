@@ -14,14 +14,14 @@
         }
     </style>
 </head>
-<body>
+<body onload="fetchLevels()">
     <div style="height: 100%; width: 100%; margin: 0%;">
         <nav class="navbar navbar-light bg-light" style="border-bottom-style: solid; border-color: gray; height: 10%; margin: 0%;">
             <h1 class="text-secondary">Sokoban</h1>
         </nav>
         <div class="row" style="height: 90%; width: 100%; margin: 0%;">
             <div style="height: 100%; width: 20%; border-right-style: solid; border-color: gray; position: relative;">
-                <div class="list-group" style="width: 100%; position: absolute; right: 0%; margin: 0%;">
+                <div id="level-list" class="list-group" style="width: 100%; position: absolute; right: 0%; margin: 0%;">
                     <a href="#" class="list-group-item list-group-item-action list-group-item-secondary active">
                     sokoban00.txt
                     </a>
@@ -46,4 +46,5 @@
         </div>
     </div>
 </body>
+<script src="/index.js"></script>
 </html>
