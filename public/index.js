@@ -1,5 +1,12 @@
 let currentLevelOption = null;
 let map = []
+let usageModal = new bootstrap.Modal(document.getElementById('usage-modal'), {
+    keyboard: false
+})
+let winModal = new bootstrap.Modal(document.getElementById('win-modal'), {
+    keyboard: false
+})
+
 
 function fetchLevels(){
     fetch("/levels", {
@@ -113,6 +120,9 @@ function startGame(level){
     })
     .then(res => res.json())
     .then(mapObj => loadMap(mapObj))
+    .then(() => {
+        usageModal.show();
+    })
 }
 
 function userMove(event){
@@ -142,6 +152,9 @@ function userMove(event){
         .then(res => res.json())
         .then(mapObj => {
             renderMap(mapObj["map"])
+            if(mapObj["win"]){
+                winModal.show()
+            }
         })
     }
 }
