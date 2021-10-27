@@ -1,49 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <title>Sokoban Game</title>
-    <style>
-        html, body{
-            margin: 0;
-            height: 100%;
-            position: relative;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/index.css" />
 </head>
-<body>
-    <div style="height: 100%; width: 100%; margin: 0%;">
-        <nav class="navbar navbar-light bg-light" style="border-bottom-style: solid; border-color: gray; height: 10%; margin: 0%;">
-            <h1 class="text-secondary">Sokoban</h1>
-        </nav>
-        <div class="row" style="height: 90%; width: 100%; margin: 0%;">
-            <div style="height: 100%; width: 20%; border-right-style: solid; border-color: gray; position: relative;">
-                <div class="list-group" style="width: 100%; position: absolute; right: 0%; margin: 0%;">
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary active">
-                    sokoban00.txt
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">sokoban01.txt</a>
-                    <a href="#" class="list-group-item list-group-item-action">sokoban02.txt</a>
-                    <a href="#" class="list-group-item list-group-item-action">sokoban03.txt</a>
-                    <a href="#" class="list-group-item list-group-item-action">sokoban04.txt</a>
-                </div>
-                <div style="width: 100%; position: absolute; bottom: 0%; right:0%; left: 0%; margin: 0%; padding: 5%;">
-                    <button type="button" class="btn btn-outline-secondary btn-lg" style="width: 100%;">Reset Game</button>
-                </div>
+
+<body onkeydown="userMove(event)" onload="fetchLevels()">
+    <nav id="nav-bar" class="navbar navbar-light bg-light">
+        <h1>Sokoban</h1>
+    </nav>
+    <div id="wrapper" class="row">
+        <div id="menu">
+            <div id="level-list" class="list-group">
+                <a href="#" class="list-group-item list-group-item-action list-group-item-secondary disabled">
+                    Loading levels ...
+                </a>
             </div>
-            <div style="height: 100%; width: 80%;">
-                <p> Draw The Game Map Here </p>
-                <p> Draw The Game Map Here </p>
-                <p> Draw The Game Map Here </p>
-                <p> Draw The Game Map Here </p>
-                <p> Draw The Game Map Here </p>
-                <p> Draw The Game Map Here </p>
-                <p> Draw The Game Map Here </p>
+            <div id="reset-wrapper">
+                <button type="button" class="btn btn-outline-secondary btn-lg" onclick="resetGame()">Reset Game</button>
+            </div>
+        </div>
+        <div id="map-wrapper" style="height: 90%; width: 80%; top: 10%; left: 20%; padding: 20px; position: absolute;">
+        </div>
+    </div>
+    <!-- Usage -->
+    <div class="modal fade" id="usage-modal" tabindex="-1" aria-labelledby="usage-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="usage-modal-label">Usage</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Keyboard controls:
+                    <ul>
+                        <li>W or Arrow Up: Up</li>
+                        <li>A or Arrow Left: Left</li>
+                        <li>S or Arrow Down: Down</li>
+                        <li>D or Arrow Right: Right</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+    <!-- Win -->
+    <div class="modal fade" id="win-modal" tabindex="-1" aria-labelledby="win-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="win-modal-label">Win</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    You win
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/index.js"></script>
 </body>
+
 </html>
