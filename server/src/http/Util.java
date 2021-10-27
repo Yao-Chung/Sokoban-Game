@@ -19,18 +19,18 @@ public class Util {
             result += "[";
             for(int c = 0; c < map.cols; ++c){
                 int targetKey = r*map.cols+c;
-                if(map.targets.containsKey(targetKey)){
+                if (map.objects[r][c] instanceof Wall){
+                    result += "\"#\"";
+                }else if (map.objects[r][c] instanceof Man){
+                    result += "\"@\"";
+                }else if (map.targets.containsKey(targetKey)){
                     if(map.targets.get(targetKey).touched){
                         result += "\"%\"";
                     }else{
                         result += "\".\"";
                     }
-                }else if (map.objects[r][c] instanceof Man){
-                    result += "\"@\"";
                 }else if (map.objects[r][c] instanceof Box){
                     result += "\"$\"";
-                }else if (map.objects[r][c] instanceof Wall){
-                    result += "\"#\"";
                 }else{
                     result += "null";
                 }
