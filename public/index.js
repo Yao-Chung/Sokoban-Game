@@ -138,22 +138,24 @@ function userMove(event){
     if(currentLevelOption !== null){
         // Get direction
         direction = null;
-        switch(event.key){
-            case 'w':
+        switch(event.code){
+            case 'KeyW':
                 direction = 2;
                 break;
-            case 'a':
+            case 'KeyA':
                 direction = 0;
                 break;
-            case 's':
+            case 'KeyS':
                 direction = 3;
                 break;
-            case 'd':
+            case 'KeyD':
                 direction = 1;
                 break;
             default:
+                console.log(event.key)
                 return;
         }
+        event.stopPropagation()
         // Move
         fetch(`/move?direction=${direction}`, {
             method: 'GET',
