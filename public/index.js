@@ -140,19 +140,22 @@ function userMove(event){
         direction = null;
         switch(event.code){
             case 'KeyW':
+            case 'ArrowUp':
                 direction = 2;
                 break;
             case 'KeyA':
+            case 'ArrowLeft':
                 direction = 0;
                 break;
             case 'KeyS':
+            case 'ArrowDown':
                 direction = 3;
                 break;
             case 'KeyD':
+            case 'ArrowRight':
                 direction = 1;
                 break;
             default:
-                console.log(event.key)
                 return;
         }
         event.stopPropagation()
